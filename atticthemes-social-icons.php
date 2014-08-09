@@ -1,7 +1,6 @@
 <?php
 /*
 Plugin Name: AtticThemes: Social Icons
-Plugin URI: https://wordpress.org/plugins/atticthemes-social-icons/
 Description: AtticThemes Social Icons provides you with a unique and user friendly UI to build sets of social icons that can be used in any shortcode enabled area like post or page contents. There is no restriction on the number of sets you can have, nor the number of icons you may add to a single set. Each icon can have its separate link, making it possible to use the same icon for unlimited number of users.
 Version: 2.0.0
 Author: atticthemes
