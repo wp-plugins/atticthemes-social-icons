@@ -1,0 +1,493 @@
+@font-face {
+	font-family: 'Mono Social Icons Font';
+	src: url('../font-icons/MonoSocialIconsFont-1.10.eot');
+	src: url('../font-icons/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'),
+		 url('../font-icons/MonoSocialIconsFont-1.10.woff') format('woff'),
+		 url('../font-icons/MonoSocialIconsFont-1.10.ttf') format('truetype'),
+		 url('../font-icons/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+	src: url('../font-icons/MonoSocialIconsFont-1.10.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+.atsi, a.atsi {
+	display: inline-block;
+
+	background-color: #e7e7e7;
+	text-align: center;
+	text-decoration: none;
+	color: #8e9296;
+
+	border-radius: 3px;
+
+	-webkit-transition: opacity 0.3s, background-color 0.3s ease;
+	-moz-transition: opacity 0.3s, background-color 0.3s ease;
+	-o-transition: opacity 0.3s, background-color 0.3s ease;
+	transition: opacity 0.3s, background-color 0.3s ease;
+
+	margin-right: 5px;
+}
+
+.atsi:hover, a.atsi:hover {
+	background-color: #ccc;
+}
+
+.atsi::before {
+	display: block;
+	/*content: attr(data-icon);*/
+
+	width: inherit;
+	height: inherit;
+
+	line-height: inherit;
+
+	font-size: inherit;
+	font-family: 'Mono Social Icons Font';
+
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	-ms-text-rendering: optimizeLegibility;
+	-o-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+
+
+.atsi.atsi-small {
+	width: 24px;
+	height: 24px;
+	line-height: 25px;
+	font-size: 24px;
+}
+
+.atsi.atsi-medium {
+	width: 32px;
+	height: 32px;
+	line-height: 33px;
+	font-size: 32px;
+}
+
+.atsi.atsi-large {
+	width: 42px;
+	height: 42px;
+	line-height: 42px;
+	font-size: 49px;
+}
+
+
+
+
+
+
+
+.atsi-fivehundredpx::before {
+	content: "\e000";
+}
+
+.atsi-aboutme::before {
+	content: "\e001";
+}
+
+.atsi-addme::before {
+	content: "\e002";
+}
+
+.atsi-amazon::before {
+	content: "\e003";
+}
+
+.atsi-aol::before {
+	content: "\e004";
+}
+
+.atsi-appstorealt::before {
+	content: "\e005";
+}
+
+.atsi-appstore::before {
+	content: "\e006";
+}
+
+.atsi-apple::before {
+	content: "\e007";
+}
+
+.atsi-bebo::before {
+	content: "\e008";
+}
+
+.atsi-behance::before {
+	content: "\e009";
+}
+
+.atsi-bing::before {
+	content: "\e010";
+}
+
+.atsi-blip::before {
+	content: "\e011";
+}
+
+.atsi-blogger::before {
+	content: "\e012";
+}
+
+.atsi-coroflot::before {
+	content: "\e013";
+}
+
+.atsi-daytum::before {
+	content: "\e014";
+}
+
+.atsi-delicious::before {
+	content: "\e015";
+}
+
+.atsi-designbump::before {
+	content: "\e016";
+}
+
+.atsi-designfloat::before {
+	content: "\e017";
+}
+
+.atsi-deviantart::before {
+	content: "\e018";
+}
+
+.atsi-diggalt::before {
+	content: "\e019";
+}
+
+.atsi-digg::before {
+	content: "\e020";
+}
+
+.atsi-dribble::before {
+	content: "\e021";
+}
+
+.atsi-drupal::before {
+	content: "\e022";
+}
+
+.atsi-ebay::before {
+	content: "\e023";
+}
+
+.atsi-email::before {
+	content: "\e024";
+}
+
+.atsi-emberapp::before {
+	content: "\e025";
+}
+
+.atsi-etsy::before {
+	content: "\e026";
+}
+
+.atsi-facebook::before {
+	content: "\e027";
+}
+
+.atsi-feedburner::before {
+	content: "\e028";
+}
+
+.atsi-flickr::before {
+	content: "\e029";
+}
+
+.atsi-foodspotting::before {
+	content: "\e030";
+}
+
+.atsi-forrst::before {
+	content: "\e031";
+}
+
+.atsi-foursquare::before {
+	content: "\e032";
+}
+
+.atsi-friendsfeed::before {
+	content: "\e033";
+}
+
+.atsi-friendstar::before {
+	content: "\e034";
+}
+
+.atsi-gdgt::before {
+	content: "\e035";
+}
+
+.atsi-github::before {
+	content: "\e036";
+}
+
+.atsi-githubalt::before {
+	content: "\e037";
+}
+
+.atsi-googlebuzz::before {
+	content: "\e038";
+}
+
+.atsi-googleplus::before {
+	content: "\e039";
+}
+
+.atsi-googletalk::before {
+	content: "\e040";
+}
+
+.atsi-gowallapin::before {
+	content: "\e041";
+}
+
+.atsi-gowalla::before {
+	content: "\e042";
+}
+
+.atsi-grooveshark::before {
+	content: "\e043";
+}
+
+.atsi-heart::before {
+	content: "\e044";
+}
+
+.atsi-hyves::before {
+	content: "\e045";
+}
+
+.atsi-icondock::before {
+	content: "\e046";
+}
+
+.atsi-icq::before {
+	content: "\e047";
+}
+
+.atsi-identica::before {
+	content: "\e048";
+}
+
+.atsi-imessage::before {
+	content: "\e049";
+}
+
+.atsi-itunes::before {
+	content: "\e050";
+}
+
+.atsi-lastfm::before {
+	content: "\e051";
+}
+
+.atsi-linkedin::before {
+	content: "\e052";
+}
+
+.atsi-meetup::before {
+	content: "\e053";
+}
+
+.atsi-metacafe::before {
+	content: "\e054";
+}
+
+.atsi-mixx::before {
+	content: "\e055";
+}
+
+.atsi-mobileme::before {
+	content: "\e056";
+}
+
+.atsi-mrwong::before {
+	content: "\e057";
+}
+
+.atsi-msn::before {
+	content: "\e058";
+}
+
+.atsi-myspace::before {
+	content: "\e059";
+}
+
+.atsi-newsvine::before {
+	content: "\e060";
+}
+
+.atsi-paypal::before {
+	content: "\e061";
+}
+
+.atsi-photobucket::before {
+	content: "\e062";
+}
+
+.atsi-picasa::before {
+	content: "\e063";
+}
+
+.atsi-pinterest::before {
+	content: "\e064";
+}
+
+.atsi-podcast::before {
+	content: "\e065";
+}
+
+.atsi-posterous::before {
+	content: "\e066";
+}
+
+.atsi-qik::before {
+	content: "\e067";
+}
+
+.atsi-quora::before {
+	content: "\e068";
+}
+
+.atsi-reddit::before {
+	content: "\e069";
+}
+
+.atsi-retweet::before {
+	content: "\e070";
+}
+
+.atsi-rss::before {
+	content: "\e071";
+}
+
+.atsi-scribd::before {
+	content: "\e072";
+}
+
+.atsi-sharethis::before {
+	content: "\e073";
+}
+
+.atsi-skype::before {
+	content: "\e074";
+}
+
+.atsi-slashdot::before {
+	content: "\e075";
+}
+
+.atsi-slideshare::before {
+	content: "\e076";
+}
+
+.atsi-smugmug::before {
+	content: "\e077";
+}
+
+.atsi-soundcloud::before {
+	content: "\e078";
+}
+
+.atsi-spotify::before {
+	content: "\e079";
+}
+
+.atsi-squidoo::before {
+	content: "\e080";
+}
+
+.atsi-stackoverflow::before {
+	content: "\e081";
+}
+
+.atsi-star::before {
+	content: "\e082";
+}
+
+.atsi-stumbleupon::before {
+	content: "\e083";
+}
+
+.atsi-technorati::before {
+	content: "\e084";
+}
+
+.atsi-tumblr::before {
+	content: "\e085";
+}
+
+.atsi-twitterbird::before {
+	content: "\e086";
+}
+
+.atsi-twitter::before {
+	content: "\e087";
+}
+
+.atsi-viddler::before {
+	content: "\e088";
+}
+
+.atsi-vimeo::before {
+	content: "\e089";
+}
+
+.atsi-virb::before {
+	content: "\e090";
+}
+
+.atsi-www::before {
+	content: "\e091";
+}
+
+.atsi-wikipedia::before {
+	content: "\e092";
+}
+
+.atsi-windows::before {
+	content: "\e093";
+}
+
+.atsi-wordpress::before {
+	content: "\e094";
+}
+
+.atsi-xing::before {
+	content: "\e095";
+}
+
+.atsi-yahoobuzz::before {
+	content: "\e096";
+}
+
+.atsi-yahoo::before {
+	content: "\e097";
+}
+
+.atsi-yelp::before {
+	content: "\e098";
+}
+
+.atsi-youtube::before {
+	content: "\e099";
+}
+
+.atsi-instagram::before {
+	content: "\e100";
+}
