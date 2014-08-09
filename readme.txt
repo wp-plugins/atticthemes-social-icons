@@ -1,6 +1,6 @@
 === AtticThemes: Social Icons ===
 Contributors: AtticThemes
-Donate link: http://atticthemes.com
+Donate link: http://themeforest.net/user/atticthemes/portfolio?ref=atticthemes
 Tags: social, icons
 Requires at least: 3.9
 Tested up to: 3.9.2
