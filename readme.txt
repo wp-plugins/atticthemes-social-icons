@@ -45,7 +45,7 @@ e.g.
 
 = How to create icon sets =
 
-It is very strit forward, just drag an icon from the stack located on top of the page into an empty "Icon Set" box (the gray box) this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area.
+It is very straightforward, just click the + icon in a "Icon Set" box (the gray box); this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area.
 
 = How to set a link for an icon in a set =
 
@@ -78,6 +78,10 @@ Just trash all the icons inside the set. If a set has all its icons removed, it 
 
 
 == Changelog ==
+
+= 2.0 =
+* Fixed an issue where it was impossible to make more then certain amount of sets.
+* Changed the concept and UI of adding icons to sets for easier managment of many sets. 
 
 = 2.0 =
 * A major core change. Now each icn in any set can have its individual link.

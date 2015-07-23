@@ -11,7 +11,7 @@ License: GPLv2 or later
 <?php
 if( !class_exists('AttichThemes_Social') ) {
 	class AttichThemes_Social {
-		public $version = '2.0.0';
+		public $version = '2.1.0';
 
 		public static $icons = array();
 		public static $icon_sizes = array();
@@ -19,7 +19,7 @@ if( !class_exists('AttichThemes_Social') ) {
 		public $shortcode_tag = 'atsi';
 		public $help_tabs = array();
 
-		private $dev = true;
+		private $dev = false;
 		private $min_suffix = '.min';
 
 		public $options_page;
