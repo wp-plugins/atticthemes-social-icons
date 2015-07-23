@@ -79,7 +79,7 @@ Just trash all the icons inside the set. If a set has all its icons removed, it 
 
 == Changelog ==
 
-= 2.0 =
+= 2..1.0 =
 * Fixed an issue where it was impossible to make more then certain amount of sets.
 * Changed the concept and UI of adding icons to sets for easier managment of many sets. 
 
