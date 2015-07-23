@@ -3,8 +3,8 @@ Contributors: AtticThemes
 Donate link: http://themeforest.net/user/atticthemes/portfolio?ref=atticthemes
 Tags: social, icons
 Requires at least: 3.9
-Tested up to: 4.0
-Stable tag: 2.0.0
+Tested up to: 4.2.2
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ AtticThemes Social Icons provides you with a unique and user friendly UI to buil
 
 **How To Use The Plugin**
 
-It is very straightforward, just drag an icon from the stack located on top of the page into an empty "Icon Set" box (the gray box) this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area, like pages and posts for example. Each time a new set is created an empty one will appear so more sets can be built if needed.
+It is very straightforward, just click the + icon in a "Icon Set" box (the gray box); this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area, like pages and posts for example. Each time a new set is created an empty one will appear, so more sets can be built if needed.
 
 To remove icons just drag & drop icons from within the set into the trash box. If a set has its icons removed, it will be deleted. 
 

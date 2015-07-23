@@ -2,7 +2,7 @@
 /*
 Plugin Name: AtticThemes: Social Icons
 Description: AtticThemes Social Icons provides you with a unique and user friendly UI to build sets of social icons that can be used in any shortcode enabled area like post or page contents. There is no restriction on the number of sets you can have, nor the number of icons you may add to a single set. Each icon can have its separate link, making it possible to use the same icon for unlimited number of users.
-Version: 2.0.0
+Version: 2.1.0
 Author: atticthemes
 Author URI: http://themeforest.net/user/atticthemes?ref=atticthemes
 License: GPLv2 or later
@@ -19,7 +19,7 @@ if( !class_exists('AttichThemes_Social') ) {
 		public $shortcode_tag = 'atsi';
 		public $help_tabs = array();
 
-		private $dev = false;
+		private $dev = true;
 		private $min_suffix = '.min';
 
 		public $options_page;
@@ -152,7 +152,7 @@ if( !class_exists('AttichThemes_Social') ) {
 			$this->help_tabs = array(
 				'icon_set_tab' => array(
 					'title' => __('Building Icon Sets', 'atticthemes_social'),
-					'content' => __('It is very straightforward, just drag an icon from the stack located on top of the page into an empty "Icon Set" box (the gray box) this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area, like pages and posts for example. Each time a new set is created an empty one will appear, so more sets can be built if needed. <br></br> To remove icons just drag & drop icons from within the set into the trash box. If a set has its icons removed, it will be deleted. <br></br>Every newly created set has its unique ID but it may be changed to any other ID that does not contain special characters or spaces. In order to change a set ID, just double click on the generated shortcode next to the "size selector". <br></br> Setting a custom ID is recommended, this will prevent issues with removed sets and unused shortcodes. If a set is removed, but the shortcode is still in use, the set will be rendered empty. By having the custom set ID in the shortcode you may restore it anythime without going through all the places the shortcode was used, in order to change it to a new one. ', 'atticthemes_social')
+					'content' => __('It is very straightforward, just click the + icon in a "Icon Set" box (the gray box); this will automatically create an "Icon Set" shortcode that can be used in any shortcode enabled area, like pages and posts for example. Each time a new set is created an empty one will appear, so more sets can be built if needed. <br></br> To remove icons just drag & drop icons from within the set into the trash box. If a set has its icons removed, it will be deleted. <br></br>Every newly created set has its unique ID but it may be changed to any other ID that does not contain special characters or spaces. In order to change a set ID, just double click on the generated shortcode next to the "size selector". <br></br> Setting a custom ID is recommended, this will prevent issues with removed sets and unused shortcodes. If a set is removed, but the shortcode is still in use, the set will be rendered empty. By having the custom set ID in the shortcode you may restore it anythime without going through all the places the shortcode was used, in order to change it to the new one.', 'atticthemes_social')
 				),
 				'icon_setup_tab' => array(
 					'title' => __('Setting Up The Icons', 'atticthemes_social'),
@@ -180,7 +180,45 @@ if( !class_exists('AttichThemes_Social') ) {
 			/* scrips and styles */
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts_and_style' ) );
 
+
+			/*$update_op = array();
+			for( $i = 0; $i < 500; $i++ ) {
+				$update_op['icon-set-' . $i] = array (
+					'icons' => array (
+						array (
+							'id' => 'github',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+						array (
+							'id' => 'githubalt',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+						array (
+							'id' => 'googleplus',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+						array (
+							'id' => 'github',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+						array (
+							'id' => 'githubalt',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+						array (
+							'id' => 'googleplus',
+							'link' => 'https://www.facebook.com/atticthemes',
+						),
+					),
+					'size' => 'small',
+				);
+			}*/
+			//update_option( 'atticthemes_social_icon_sets', $update_op);
 			//delete_option( 'atticthemes_social_icon_sets' );
+			//delete_option( 'atticthemes_social_icons_ids' );
+			//error_log(var_export(get_option( 'atticthemes_social_icon_sets', false ), true));
+
+			//update_option( 'atticthemes_social_icons_ids', 500);
 		} //END public function __construct
 
 
@@ -321,38 +359,32 @@ if( !class_exists('AttichThemes_Social') ) {
 			?>
 			<div class="wrap">
 				<div class="atticthemes-social-icons-wrapper">
-					<div class="atticthemes-social-icons-list-wrapper">
-						<ul class="atticthemes-social-icons-list">
-							<?php
-							foreach ( self::$icons as $id => $title ) {
-								?><li title="<?php echo esc_attr( $title ); ?>" data-icon="<?php echo $id; ?>" class="atsi atsi-<?php echo $id; ?> no-link"></li><?php
-							}
-							?>
-						</ul>
-					</div>
+					
 					<div class="atticthemes-social-icons-title-wrapper">
 						<span class="atticthemes-social-icons-title"><?php 
 						_e('Create Icon Sets', 'atticthemes_social'); 
 						?></span>
-						<em><?php _e('Just Drag&Drop icons into an empty container to make new icon sets. Icons marked with * dont have any link set, double click on that icon to set a link.', 'atticthemes_social'); ?></em>
+						<em><?php _e('Click on the + icon in an icon set to add icons to that set. Drag selected icons inside sets to rearrange them. Drop icons into the trash can to get rid of them.', 'atticthemes_social'); ?></em>
 					</div>
+
 					<div class="atticthemes-social-icon-sets-wrapper">
 						<span class="spinner atticthemes-social-icons-set-preloader"></span>
 						<?php $sets = get_option( 'atticthemes_social_icon_sets', array() ); //print_r($sets); ?>
 						<?php if( isset( $sets ) && !empty( $sets ) ) { ?>
 							<?php foreach( $sets as $set_id => $set_data ) { ?>
 								<?php $icons = isset($set_data['icons']) ? $set_data['icons'] : array(); ?>
-								<?php if( !empty($icons) ) { ?>
+								<?php if( $icons ) { ?>
 									<div data-set-id="<?php echo $set_id; ?>" class="atticthemes-social-icon-set-container <?php echo 'atticthemes-social-icon-size-' . $set_data['size']; ?>">
 										<ul class="atticthemes-social-icon-set-trash"></ul>
 										<ul class="atticthemes-social-icon-set">
 											<?php foreach( $icons as $icon ) {
 												$id = isset($icon['id']) ? $icon['id'] : '';
 												$link = isset($icon['link']) ? $icon['link'] : '';
-												$title = isset(self::$icons[$icon['id']]) ? self::$icons[$icon['id']] : '';
+												$title = $id && isset(self::$icons[$icon['id']]) ? self::$icons[$icon['id']] : '';
 												?>
 												<li title="<?php echo esc_attr( $title ); ?>" data-icon="<?php echo $id; ?>" data-link="<?php echo $link; ?>" class="atsi atsi-<?php echo $id; ?> <?php echo 'atsi-size-' . $set_data['size']; ?> <?php echo empty($link) ? 'no-link' : ''; ?>"></li>
 											<?php } ?>
+											<li class="atticthemes-social-icon-add-icon dashicons dashicons-plus"></li>
 										</ul>
 										<div class="atticthemes-social-icon-set-shortcode">
 											<input type="text" readonly="true" value="<?php echo esc_attr('['.$this->shortcode_tag.' set="'.$set_id.'"]'); ?>" class="atticthemes-social-icon-set-shortcode-text" />
@@ -367,7 +399,25 @@ if( !class_exists('AttichThemes_Social') ) {
 								<?php } //END if !empty($icons) ?>
 							<?php } ?>
 						<?php } ?>
+					</div>
 
+					<div class="atticthemes-social-icons-list-wrapp">
+						<div class="atticthemes-social-icons-list-cont">
+							<span class="atticthemes-social-icons-list-close dashicons dashicons-no"></span>
+							<div class="atticthemes-social-icons-list-title">
+								<div class="atticthemes-social-icons-list-title-wrap"><?php 
+									_e('Available Icons', 'atticthemes_social');
+									?><span class="spinner atticthemes-social-icons-list-preloader"></span>
+								</div>
+							</div>
+							<h4><?php _e('Click on the icon to add the set.', 'atticthemes_social'); ?></h4>
+							<ul class="atticthemes-social-icons-list"><?php
+								foreach ( self::$icons as $id => $title ) {
+									?><li title="<?php echo esc_attr( $title ); ?>" data-icon="<?php echo $id; ?>" class="atsi atsi-<?php echo $id; ?> no-link"></li><?php
+								}
+							?></ul>
+							<span class="atticthemes-social-icons-list-status-bar"></span>
+						</div>
 					</div>
 
 					<div class="atticthemes-social-icon-editor-wrapp">
@@ -438,7 +488,8 @@ if( !class_exists('AttichThemes_Social') ) {
 			}
 
 			if( isset($_REQUEST['data']) && !empty($_REQUEST['data']) ) {
-				$data = $_REQUEST['data'];
+				$data = json_decode( base64_decode( $_REQUEST['data'] ), true );
+
 				//---------
 				if( $this->areValidArrayKeys( $data ) ) {
 					$update = update_option( 'atticthemes_social_icon_sets', $data );

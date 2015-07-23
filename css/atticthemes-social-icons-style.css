@@ -22,10 +22,10 @@
 
 	border-radius: 3px;
 
-	-webkit-transition: opacity 0.3s, background-color 0.3s ease;
-	-moz-transition: opacity 0.3s, background-color 0.3s ease;
-	-o-transition: opacity 0.3s, background-color 0.3s ease;
-	transition: opacity 0.3s, background-color 0.3s ease;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
 
 	margin-right: 5px;
 }

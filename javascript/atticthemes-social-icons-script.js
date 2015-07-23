@@ -9,10 +9,11 @@
 	/* ================================================================================================================ */
 	/* ================================================================================================================ */
 
+	$('.atticthemes-social-icon-sets-wrapper').on( 'click', 'li.atticthemes-social-icon-add-icon', openAdder );
 	
 	function applyDblClick() {
-		$( '.atticthemes-social-icon-set' ).off( 'dblclick', 'li.atsi', openEditor );
-		$( '.atticthemes-social-icon-set' ).on( 'dblclick', 'li.atsi', openEditor );
+		$( '.atticthemes-social-icon-sets-wrapper' ).off( 'dblclick', 'li.atsi', openEditor );
+		$( '.atticthemes-social-icon-sets-wrapper' ).on( 'dblclick', 'li.atsi', openEditor );
 	}
 	applyDblClick();
 
@@ -45,9 +46,66 @@
 		});
 	}
 
+
+	function openAdder() {
+		var adder_button = $(this);
+		var set = $('.atticthemes-social-icon-set-container').has( this );
+		var set_id = set.attr('data-set-id');
+
+		var adder = $('.atticthemes-social-icons-list-wrapp');
+			adder.fadeIn('fast');
+
+		adder.data('set_id', set_id );
+
+		var closer = $( '.atticthemes-social-icons-list-close', adder );
+			closer.one( 'click', closeAdder );
+
+		function closeAdder() {
+			adder.fadeOut('fast');
+		}
+	}
+
+
+	$('.atticthemes-social-icons-list').on('click', 'li', function() {
+		var icon = $(this);
+		var new_icon = icon.clone();
+
+		var adder = $('.atticthemes-social-icons-list-wrapp');
+		var set_id = adder.data('set_id');
+
+		var set = $('.atticthemes-social-icon-set-container[data-set-id="'+set_id+'"]');
+		var add_icon = $( '.atticthemes-social-icon-add-icon', set );
+			add_icon.before( new_icon );
+
+		var preloader = adder.find('.atticthemes-social-icons-list-preloader');
+			preloader.fadeIn('fast');
+
+		var is_new = set.hasClass('new-atticthemes-social-icon-set');
+			set.removeClass('new-atticthemes-social-icon-set');
+			if( is_new ) {
+				updateIDs();
+			}
+
+		saveSets( function( response ) {
+			if( response.status === 'success' || response.status === 'no-change' ) {
+				preloader.fadeOut({
+					duration: 200,
+					complete: function() {
+						console.log( 'icon added' );
+					}
+				});
+			} else if( response.status === 'error' ) {
+				preloader.fadeOut({duration: 200});
+				$('.atticthemes-social-icons-list-status-bar').text( response.message );
+			}
+		});
+		//console.log( set );
+	});
+
+
 	$('.atticthemes-social-icon-editor').on('click', '.atticthemes-social-icon-editor-cancel-button', function() {
 		var editor = $('.atticthemes-social-icon-editor-wrapp');
-		editor.fadeOut();
+		editor.fadeOut('fast');
 	});
 
 	$('.atticthemes-social-icon-editor').on('click', '.atticthemes-social-icon-editor-done-button', function() {
@@ -60,7 +118,7 @@
 			buttons.attr('disabled', true);
 
 		var preloader = editor.find('.atticthemes-social-icon-editor-preloader');
-			preloader.fadeIn();
+			preloader.fadeIn('fast');
 
 		var status_bar = editor.find('.atticthemes-social-icon-editor-status-bar');
 
@@ -88,7 +146,7 @@
 			} else if( response.status === 'error' ) {
 				preloader.fadeOut({duration: 200});
 				$('.atticthemes-social-icon-set-id-editor-status-bar').text( response.message );
-				set.attr( 'data-set-id', set_id );
+				//set.attr( 'data-set-id', set_id );
 			}
 		});
 
@@ -104,15 +162,6 @@
 	/* ================================================================================================================ */
 	/* ================================================================================================================ */
 
-	function applyDraggable() {
-		$( '.atticthemes-social-icons-list li' ).not('li.atticthemes-social-icon-no-link').draggable({
-			connectToSortable: '.atticthemes-social-icon-set',
-			helper: 'clone',
-			revert: 'invalid'
-		});
-	}
-	applyDraggable();
-
 
 	$( '.atticthemes-social-icon-set-container' ).each(function() {
 		var set = $(this);
@@ -121,16 +170,9 @@
 	}); //END each
 
 	function addSet( set ) {
-		$( '.atticthemes-social-icon-set', set ).droppable({
-			activeClass: 'ui-state-default',
-			hoverClass: 'ui-state-hover',
-			accept: ':not(.ui-sortable-helper)',
-			drop: function( event, ui ) {
-				$('.atticthemes-social-icon-set-dummy-icon', set).remove();
-			}
-		}).sortable({
+		$( '.atticthemes-social-icon-set', set ).sortable({
 			connectWith: $('.atticthemes-social-icon-set-trash', set),
-			items: 'li:not(.placeholder)',
+			items: 'li:not(.placeholder):not(.atticthemes-social-icon-add-icon)',
 			revert: true,
 			placeholder: 'ui-state-highlight',
 			sort: function() {
@@ -165,8 +207,8 @@
 					duration: 150,
 					complete: function() {
 						$( '.atticthemes-social-icon-set-trash', set ).empty();
-
-						if( $('.atticthemes-social-icon-set li', set).length === 0 ) {
+						var set_lis = $('.atticthemes-social-icon-set li', set).not('li.atticthemes-social-icon-add-icon').not('li.atticthemes-social-icon-set-dummy-icon');
+						if( set_lis.length === 0 ) {
 							setTimeout( function() {
 								set.slideUp().fadeOut({
 									complete: function() {
@@ -206,7 +248,7 @@
 
 	$('.atticthemes-social-icon-set-id-editor-cancel-button').on('click', function() {
 		var editor = $('.atticthemes-social-icon-set-id-editor-wrapp');
-		editor.fadeOut();
+		editor.fadeOut('fast');
 	});
 
 	$('.atticthemes-social-icon-set-id-editor-done-button').on('click', function() {
@@ -218,7 +260,7 @@
 
 		
 		var preloader = editor.find('.atticthemes-social-icon-set-id-editor-preloader');
-			preloader.fadeIn();
+			preloader.fadeIn('fast');
 
 		set.attr( 'data-set-id', input.val() );
 
@@ -230,7 +272,7 @@
 				preloader.fadeOut({
 					duration: 200,
 					complete: function() {
-						editor.fadeOut();
+						editor.fadeOut('fast');
 					}
 				});
 			} else if( response.status === 'error' ) {
@@ -255,7 +297,7 @@
 		}, 50);
 
 		editor.attr('data-set-id', set.attr('data-set-id') );
-		editor.fadeIn();
+		editor.fadeIn('fast');
 
 		input.off( 'keyup' );
 		input.on( 'keyup', function( e ) {
@@ -296,7 +338,8 @@
 
 			var icon_lis = set.find('.atticthemes-social-icon-set>li')
 				.not('li.ui-state-highlight')
-				.not('li.atticthemes-social-icon-set-dummy-icon');
+				.not('li.atticthemes-social-icon-set-dummy-icon')
+				.not('li.atticthemes-social-icon-add-icon');
 
 			icon_lis.each(function() {
 				icons.push({
@@ -323,17 +366,17 @@
 				data : {
 					action: 'atticthemes_social_icon_save_set', 
 					nonce: atticthemes_social_icons.ajax_nonce,
-					data: sets
+					data: btoa( JSON.stringify( sets ) )
 				},
 				success: function( response ) {
-					//console.log( response );
+					console.log( response );
 
 					if( callback ) {
 						callback( response );
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					//console.log(jqXHR, textStatus, errorThrown);
+					console.log(jqXHR, textStatus, errorThrown);
 				}
 			});
 		}
@@ -347,7 +390,9 @@
 		$('<ul/>').addClass('atticthemes-social-icon-set-trash').appendTo( set );
 
 		var set_ul = $('<ul/>').addClass('atticthemes-social-icon-set').appendTo( set );
+
 			$('<li/>').addClass('atticthemes-social-icon-set-dummy-icon').appendTo( set_ul );
+			$('<li/>').addClass('atticthemes-social-icon-add-icon dashicons dashicons-plus').appendTo( set_ul );
 
 		var shortcode = $('<div/>').addClass('atticthemes-social-icon-set-shortcode').appendTo( set );
 		var shortcode_input = $('<input/>').attr({'readonly': true, 'type': 'text'}).addClass('atticthemes-social-icon-set-shortcode-text').appendTo( shortcode );
@@ -363,7 +408,7 @@
 		}
 
 
-		set.hide().appendTo( $('.atticthemes-social-icon-sets-wrapper') ).fadeIn();
+		set.hide().appendTo( $('.atticthemes-social-icon-sets-wrapper') ).fadeIn('fast');
 		
 		return set;
 	}
@@ -372,7 +417,7 @@
 
 
 	function updateIDs( dont ) {
-		$('.atticthemes-social-icons-set-preloader').fadeIn();
+		$('.atticthemes-social-icons-set-preloader').fadeIn('fast');
 		$.ajax({
 			type : 'post',
 			dataType : 'json',
