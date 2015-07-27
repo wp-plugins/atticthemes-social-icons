@@ -23,7 +23,7 @@
 		var editor = $('.atticthemes-social-icon-editor-wrapp');
 			editor.find('.atticthemes-social-icon-editor-title').text( icon.attr('title') );
 		var input = editor.find('input.atticthemes-social-icon-link-input');
-			input.val( icon.attr('data-link') );
+			input.val( decodeURI(icon.attr('data-link')) );
 			setTimeout(function() {
 				input.focus().select();
 			}, 50);
@@ -68,7 +68,9 @@
 
 	$('.atticthemes-social-icons-list').on('click', 'li', function() {
 		var icon = $(this);
-		var new_icon = icon.clone();
+		var new_icon = icon.clone().attr({
+			'data-link': ''
+		});
 
 		var adder = $('.atticthemes-social-icons-list-wrapp');
 		var set_id = adder.data('set_id');
@@ -344,7 +346,7 @@
 			icon_lis.each(function() {
 				icons.push({
 					'id': $(this).attr('data-icon'),
-					'link': $(this).attr('data-link') || null,
+					'link': encodeURI( $(this).attr('data-link') ) || null,
 				});
 			});
 
@@ -359,6 +361,7 @@
 		//console.log( sets );
 
 		if( !$.isEmptyObject(sets) ) {
+			//console.log(JSON.stringify(sets) );
 			$.ajax({
 				type : 'post',
 				dataType : 'json',
@@ -369,14 +372,14 @@
 					data: btoa( JSON.stringify( sets ) )
 				},
 				success: function( response ) {
-					console.log( response );
+					//console.log( 'saveSets', response );
 
 					if( callback ) {
 						callback( response );
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					console.log(jqXHR, textStatus, errorThrown);
+					console.log('saveSets', jqXHR, textStatus, errorThrown);
 				}
 			});
 		}
@@ -428,7 +431,7 @@
 				increment: dont === undefined ? true : false
 			},
 			success: function(response) {
-				//console.log( response );
+				//console.log( 'updateIDs', response );
 
 				$('.atticthemes-social-icons-set-preloader').fadeOut({
 					duration: 150,
@@ -440,7 +443,7 @@
 
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				//console.log(jqXHR, textStatus, errorThrown);
+				console.log('updateIDs', jqXHR, textStatus, errorThrown);
 			}
 		});
 	}

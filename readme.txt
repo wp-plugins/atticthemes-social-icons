@@ -4,7 +4,7 @@ Donate link: http://themeforest.net/user/atticthemes/portfolio?ref=atticthemes
 Tags: social, icons
 Requires at least: 3.9
 Tested up to: 4.2.2
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,9 @@ Just trash all the icons inside the set. If a set has all its icons removed, it 
 
 
 == Changelog ==
+
+= 2.1.1 =
+* More fises concerning the previous issue with not being able to save/make more then certain amount of sets.
 
 = 2.1.0 =
 * Fixed an issue where it was impossible to make more then certain amount of sets.

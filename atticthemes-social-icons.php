@@ -2,7 +2,7 @@
 /*
 Plugin Name: AtticThemes: Social Icons
 Description: AtticThemes Social Icons provides you with a unique and user friendly UI to build sets of social icons that can be used in any shortcode enabled area like post or page contents. There is no restriction on the number of sets you can have, nor the number of icons you may add to a single set. Each icon can have its separate link, making it possible to use the same icon for unlimited number of users.
-Version: 2.1.0
+Version: 2.1.1
 Author: atticthemes
 Author URI: http://themeforest.net/user/atticthemes?ref=atticthemes
 License: GPLv2 or later
@@ -11,7 +11,7 @@ License: GPLv2 or later
 <?php
 if( !class_exists('AttichThemes_Social') ) {
 	class AttichThemes_Social {
-		public $version = '2.1.0';
+		public $version = '2.1.1';
 
 		public static $icons = array();
 		public static $icon_sizes = array();
@@ -197,18 +197,6 @@ if( !class_exists('AttichThemes_Social') ) {
 							'id' => 'googleplus',
 							'link' => 'https://www.facebook.com/atticthemes',
 						),
-						array (
-							'id' => 'github',
-							'link' => 'https://www.facebook.com/atticthemes',
-						),
-						array (
-							'id' => 'githubalt',
-							'link' => 'https://www.facebook.com/atticthemes',
-						),
-						array (
-							'id' => 'googleplus',
-							'link' => 'https://www.facebook.com/atticthemes',
-						),
 					),
 					'size' => 'small',
 				);
@@ -217,6 +205,8 @@ if( !class_exists('AttichThemes_Social') ) {
 			//delete_option( 'atticthemes_social_icon_sets' );
 			//delete_option( 'atticthemes_social_icons_ids' );
 			//error_log(var_export(get_option( 'atticthemes_social_icon_sets', false ), true));
+
+			//update_option( 'atticthemes_social_icon_sets', get_option('_backup_atticthemes_social_icon_sets') );
 
 			//update_option( 'atticthemes_social_icons_ids', 500);
 		} //END public function __construct
@@ -230,7 +220,7 @@ if( !class_exists('AttichThemes_Social') ) {
 				'set' => false,
 			), $atts ) );
 
-			$sets = get_option( 'atticthemes_social_icon_sets', false );
+			$sets = $this->decode( get_option( 'atticthemes_social_icon_sets', '' ) );
 
 			ob_start();
 			if( $sets && $set && isset($sets[$set]) && isset($sets[$set]['icons']) ) {
@@ -369,7 +359,7 @@ if( !class_exists('AttichThemes_Social') ) {
 
 					<div class="atticthemes-social-icon-sets-wrapper">
 						<span class="spinner atticthemes-social-icons-set-preloader"></span>
-						<?php $sets = get_option( 'atticthemes_social_icon_sets', array() ); //print_r($sets); ?>
+						<?php $sets = $this->decode( get_option( 'atticthemes_social_icon_sets', '' ) ); //print_r($sets); ?>
 						<?php if( isset( $sets ) && !empty( $sets ) ) { ?>
 							<?php foreach( $sets as $set_id => $set_data ) { ?>
 								<?php $icons = isset($set_data['icons']) ? $set_data['icons'] : array(); ?>
@@ -488,7 +478,7 @@ if( !class_exists('AttichThemes_Social') ) {
 			}
 
 			if( isset($_REQUEST['data']) && !empty($_REQUEST['data']) ) {
-				$data = json_decode( base64_decode( $_REQUEST['data'] ), true );
+				$data = $_REQUEST['data'];
 
 				//---------
 				if( $this->areValidArrayKeys( $data ) ) {
@@ -518,12 +508,27 @@ if( !class_exists('AttichThemes_Social') ) {
 		}
 
 		public function areValidArrayKeys( $array ) {
-			foreach( $array as $key => $value ) {
-				if( preg_match('/[^a-zA-Z0-9\-\_]+/', $key) ) {
-					return false;
+			if( is_string($array) ) {
+				$array = $this->decode( $array );
+			}
+
+			if( $array ) {
+				foreach( $array as $key => $value ) {
+					if( preg_match('/[^a-zA-Z0-9\-\_]+/', $key) ) {
+						return false;
+					}
 				}
 			}
+			
 			return true;
+		}
+
+		public function decode( $data ) {
+			if( is_array($data) ) {
+				return $data;
+			} else {
+				return json_decode( base64_decode($data), true );
+			}
 		}
 	}
 
